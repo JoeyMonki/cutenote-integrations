@@ -17,8 +17,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c957e74b330242dbb2b94463f282120c051d7e5d71a5bf0c510638ff7008a130",
-      "size": 826
+      "sha256": "15823d0a7015403a390b44d324119439312898a13e419341e36b54bbbb66ea5c",
+      "size": 979
     },
     {
       "path": "LICENSE",
@@ -27,18 +27,18 @@
     },
     {
       "path": "PUBLISHING.md",
-      "sha256": "d2138caa1b75bfb7b0da5b3a53a05f6d3850db2da000f6b8a3ef5ff5846df7a3",
-      "size": 6576
+      "sha256": "9e845c0ed5126e346e9e7454acc2cf12e8555a574ff092e810c958f3246e6fd0",
+      "size": 6795
     },
     {
       "path": "README.md",
-      "sha256": "8628710eca7e3b49f4388130d3d41e082a79e4a98a26a197e1eecf1c28a2c0e7",
-      "size": 4359
+      "sha256": "516adbfbb9464a20dc11e8e2b519840043088f1d3ee88237a4fe9341dd272551",
+      "size": 4571
     },
     {
       "path": "README.zh-CN.md",
-      "sha256": "655fffb30fdce0de8fd3a769d357e3c7b1b60cfd539b5eef4abdbe11b8877dfd",
-      "size": 3958
+      "sha256": "56b18b498bc13f5771e228a6e92d7b27ea073a725ccd64554edd5b6c45f26044",
+      "size": 4206
     },
     {
       "path": "claude-code/cutenote/.claude-plugin/plugin.json",
@@ -187,8 +187,8 @@
     },
     {
       "path": "scripts/validate-artifacts.mjs",
-      "sha256": "48005e5801a584a22f593c22112d02e7ec9aac84cc5f21416c52e4e5cf641e12",
-      "size": 18452
+      "sha256": "359e964da4e60cc629671adbc763ee7554f6fdbc57a20654c8715fdec31c908f",
+      "size": 18509
     },
     {
       "path": "scripts/version-policy.mjs",

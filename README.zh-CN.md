@@ -6,7 +6,7 @@
 **传输协议：** 远程 Streamable HTTP
 **身份验证：** 浏览器内完成 OAuth 2.1 授权码 + PKCE；不要把令牌粘贴进聊天。
 
-[English](README.md) · [CuteNote 官网](https://www.cutenote.app/) · [网页安装向导](https://www.cutenote.app/ai-skill)
+[English](README.md) · [GitHub 公开源码](https://github.com/JoeyMonki/cutenote-integrations) · [CuteNote 官网](https://www.cutenote.app/) · [网页安装向导](https://www.cutenote.app/ai-skill)
 
 此公开集成包采用 [MIT License](LICENSE)，仅包含 Skill、MCP 客户端配置、插件/连接器元数据、公开文档及发布工具；不包含 CuteNote 私有应用源码或 Git 历史。
 
@@ -54,12 +54,13 @@ CuteNote 有意不提供 `ask_note` 工具。
 
 - 官网：[www.cutenote.app](https://www.cutenote.app/)
 - 安装向导：[www.cutenote.app/ai-skill](https://www.cutenote.app/ai-skill)
+- 官方公开源码：[github.com/JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations)
 - 隐私政策：**TODO — 尚未确认公开 URL**
 - 服务条款：**TODO — 尚未确认公开 URL**
 - 用户支持：**TODO — 尚未确认公开支持 URL**
 - 服务状态：**TODO — 尚未确认公开状态页**
 
-这些集成产物由 CuteNote 团队维护。私有产品仓库是编写源；这个 MIT 授权的包只应作为单向生成的公开镜像发布。文件存在不代表远程仓库、软件包或市场条目已经上线。详见 [PUBLISHING.md](PUBLISHING.md)。
+官方公开源码仓库是 [JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations)，它是私有编写源的单向生成镜像。GitHub 源码仓库已经上线；GitHub Release、npm 发布、市场条目和远程发布自动化尚未上线。详见 [PUBLISHING.md](PUBLISHING.md)。
 
 ## 校验源码工作区
 

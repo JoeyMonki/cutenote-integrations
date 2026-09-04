@@ -1,6 +1,6 @@
 # Publishing and version policy for CuteNote integrations
 
-> Status: the local version, MIT license, packaging, checksum, and migration rules are established. No remote public repository, GitHub Release, npm publication, marketplace listing, or remote publication automation is implied.
+> Status: the official public source repository is live at [github.com/JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations). The MIT license, packaging, checksum, and migration rules are established. No GitHub Release, npm publication, marketplace listing, or remote publication automation is live yet.
 
 ## Unified version contract
 
@@ -36,7 +36,7 @@ A tool removal, rename, or breaking input/output schema change requires all of t
 
 ## Source-of-truth rule
 
-The private CuteNote product repository owns every file published from `integrations/`. The future public `cutenote-integrations` repository is a distribution mirror, not a second authoring location.
+The private CuteNote product repository owns every file published from `integrations/`. The public [JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations) repository is a distribution mirror, not a second authoring location.
 
 - Make content changes only in the private repository.
 - Edit only `integrations/skills/cutenote/SKILL.md` for shared Skill instructions, then run `node integrations/scripts/sync-cutenote-skill.mjs --write` to update packaged copies.
@@ -70,4 +70,4 @@ Public pull requests from contributors are welcome as proposals, but maintainers
 
 Rollback means republishing the last known-good private snapshot as a new public commit and release, then withdrawing affected marketplace versions when supported. Do not repair only the public mirror: that would create drift and make the next publication overwrite the emergency fix.
 
-Remote repository creation, marketplace submission, credentials, and remote automation setup remain separate operational steps; this document intentionally does not perform or assume them. The exported source itself is licensed under MIT.
+GitHub Release creation, marketplace submission, npm publication, credentials, and remote automation setup remain separate operational steps; this document intentionally does not perform or assume them. The public source repository is already live, and the exported source is licensed under MIT.

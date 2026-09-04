@@ -6,7 +6,7 @@
 **Transport:** remote Streamable HTTP
 **Authentication:** OAuth 2.1 authorization code flow with PKCE in the browser; never paste a token into chat.
 
-[中文说明](README.zh-CN.md) · [Website](https://www.cutenote.app/) · [Web installer](https://www.cutenote.app/ai-skill)
+[中文说明](README.zh-CN.md) · [GitHub source](https://github.com/JoeyMonki/cutenote-integrations) · [Website](https://www.cutenote.app/) · [Web installer](https://www.cutenote.app/ai-skill)
 
 This public integration package is released under the [MIT License](LICENSE). It contains only Skill, MCP client configuration, plugin/connector metadata, public documentation, and release tooling; it does not contain the private CuteNote application source or Git history.
 
@@ -54,12 +54,13 @@ See the human-readable [compatibility matrix](docs/compatibility.md) and machine
 
 - Website: [www.cutenote.app](https://www.cutenote.app/)
 - Install guide: [www.cutenote.app/ai-skill](https://www.cutenote.app/ai-skill)
+- Official public source: [github.com/JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations)
 - Privacy policy: **TODO — no confirmed public URL yet**
 - Terms of service: **TODO — no confirmed public URL yet**
 - Support: **TODO — no confirmed public support URL yet**
 - Service status: **TODO — no confirmed public status page yet**
 
-The CuteNote team is the official source of these integration artifacts. The private product repository is the authoring source; this MIT-licensed package is designed to be published only as a one-way generated mirror. Its presence does not claim that a remote repository, package, or marketplace listing is already live. See [PUBLISHING.md](PUBLISHING.md).
+The official public source repository is [JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations). It is a one-way generated mirror of the private authoring source. The GitHub source repository is live; a GitHub Release, npm publication, marketplace listing, and remote publication automation are not live yet. See [PUBLISHING.md](PUBLISHING.md).
 
 ## Validate a source checkout
 

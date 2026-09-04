@@ -18,7 +18,7 @@ const mcpConfigPaths = [
 ];
 
 const requiredPublicDocs = {
-  "README.md": ["https://www.cutenote.app/mcp", "## Five tools", "## Quick start", "README.zh-CN.md", "docs/compatibility.md", "official source"],
+  "README.md": ["https://www.cutenote.app/mcp", "## Five tools", "## Quick start", "README.zh-CN.md", "docs/compatibility.md", "official public source"],
   "README.zh-CN.md": ["https://www.cutenote.app/mcp", "## 五个工具", "## 快速安装", "README.md", "docs/compatibility.md", "官方来源"],
   "docs/authentication.md": ["OAuth 2.1", "PKCE", "notes:read", "notes:write", "notes:export"],
   "docs/tools.md": ["create_note", "get_generation_job", "list_notes", "get_note", "export_note"],
@@ -28,7 +28,7 @@ const requiredPublicDocs = {
   "docs/data-flow.md": ["AI client", "authorization server", "MCP tool call", "Trust boundaries"],
   "docs/compatibility.md": ["verified", "compatible", "adapter_required", "experimental", "unsupported", "unknown", "last_verified_at", "integration_release", "release.json"],
   "PUBLISHING.md": ["Semantic Versioning", "cutenote-integrations-vMAJOR.MINOR.PATCH", "90 calendar days", "integrations:bundle", "integrations:bundle:verify"],
-  "CHANGELOG.md": ["## [Unreleased]", "source baseline (unpublished)", "does not assert"]
+  "CHANGELOG.md": ["## [Unreleased]", "source baseline (GitHub source published; Release unpublished)", "public source repository is live"]
 };
 
 const compatibilityStatuses = new Set([
