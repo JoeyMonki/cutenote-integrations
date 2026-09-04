@@ -17,8 +17,8 @@
     },
     {
       "path": ".github/workflows/validate.yml",
-      "sha256": "22dc134e0d56e076ca701dfc724b0647bbcdb98310d3ffc05da3aa475d52d245",
-      "size": 941
+      "sha256": "5122053e8302ff16f81f0099615c9e550df2bd7cc4ab47342c3b03664c133b47",
+      "size": 949
     },
     {
       "path": ".gitignore",
@@ -177,7 +177,7 @@
     },
     {
       "path": "publication.json",
-      "sha256": "f0b41984b5d31bedcefda5366035931d7f3b86d7e9c33c1865b26e3ca9dd6e05",
+      "sha256": "6febe870cd0bfc0258ed634995d3e55916acb706ddfc493d63d341ef3d2f77e8",
       "size": 509
     },
     {
@@ -212,8 +212,8 @@
     },
     {
       "path": "scripts/validate-artifacts.mjs",
-      "sha256": "f69a50b5b9eaaddaa4faac6f38a00f575fac95446f33392a61ad126faa30fbe4",
-      "size": 22086
+      "sha256": "8d4959537977a8835ba0860582fb737569811a4341dcf717381ddf572d2d0659",
+      "size": 22094
     },
     {
       "path": "scripts/version-policy.mjs",

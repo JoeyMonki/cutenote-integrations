@@ -269,8 +269,8 @@ for (const [documentPath, requiredPhrases] of Object.entries(requiredPublicDocs)
 const workflowPath = path.join(integrationsRoot, ".github", "workflows", "validate.yml");
 const workflow = contents.get(workflowPath);
 const expectedPinnedActions = new Map([
-  ["actions/checkout", ["11d5960a326750d5838078e36cf38b85af677262", "v4"]],
-  ["actions/setup-node", ["49933ea5288caeca8642d1e84afbd3f7d6820020", "v4"]]
+  ["actions/checkout", ["93cb6efe18208431cddfb8368fd83d5badbf9bfd", "v5.0.1"]],
+  ["actions/setup-node", ["a0853c24544627f65ddf259abe73b1d18a591444", "v5.0.0"]]
 ]);
 const usesLines = workflow.match(/^\s*uses:\s*.+$/gm) ?? [];
 if (usesLines.length !== expectedPinnedActions.size) throw new Error("validate workflow: unexpected number of third-party actions");
