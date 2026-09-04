@@ -27,8 +27,9 @@ const requiredPublicDocs = {
   "docs/security.md": ["Credential boundary", "User data access", "signed artifact URLs"],
   "docs/data-flow.md": ["AI client", "authorization server", "MCP tool call", "Trust boundaries"],
   "docs/compatibility.md": ["verified", "compatible", "adapter_required", "experimental", "unsupported", "unknown", "last_verified_at", "integration_release", "release.json"],
+  "SECURITY.md": ["GitHub Private Vulnerability Reporting", "security/advisories/new", "Do not disclose", "does not promise a response time"],
   "PUBLISHING.md": ["Semantic Versioning", "cutenote-integrations-vMAJOR.MINOR.PATCH", "90 calendar days", "integrations:bundle", "integrations:bundle:verify"],
-  "CHANGELOG.md": ["## [Unreleased]", "source baseline (GitHub source published; Release unpublished)", "public source repository is live"]
+  "CHANGELOG.md": ["## [Unreleased]", "## [1.0.0] - source baseline", "publication.json", "does not claim remote publication early"]
 };
 
 const compatibilityStatuses = new Set([
@@ -265,6 +266,30 @@ for (const [documentPath, requiredPhrases] of Object.entries(requiredPublicDocs)
   }
 }
 
+const workflowPath = path.join(integrationsRoot, ".github", "workflows", "validate.yml");
+const workflow = contents.get(workflowPath);
+const expectedPinnedActions = new Map([
+  ["actions/checkout", ["11d5960a326750d5838078e36cf38b85af677262", "v4"]],
+  ["actions/setup-node", ["49933ea5288caeca8642d1e84afbd3f7d6820020", "v4"]]
+]);
+const usesLines = workflow.match(/^\s*uses:\s*.+$/gm) ?? [];
+if (usesLines.length !== expectedPinnedActions.size) throw new Error("validate workflow: unexpected number of third-party actions");
+for (const line of usesLines) {
+  const match = line.match(/^\s*uses:\s*([^@\s]+)@([a-f0-9]{40})\s+#\s+(v\S+)\s*$/);
+  if (!match) throw new Error(`validate workflow: action must use a full commit SHA and version comment (${line.trim()})`);
+  const expected = expectedPinnedActions.get(match[1]);
+  if (!expected || match[2] !== expected[0] || match[3] !== expected[1]) {
+    throw new Error(`validate workflow: unapproved or stale action pin (${line.trim()})`);
+  }
+}
+for (const required of ["permissions:\n  contents: read", "timeout-minutes: 10", "cancel-in-progress: true", "run: npm ci", "run: npm run check", "run: npm run bundle", "run: npm run bundle:verify"]) {
+  if (!workflow.includes(required)) throw new Error(`validate workflow: missing ${required}`);
+}
+const dependabot = contents.get(path.join(integrationsRoot, ".github", "dependabot.yml"));
+for (const required of ["package-ecosystem: \"npm\"", "interval: \"weekly\"", "directory: \"/\""]) {
+  if (!dependabot.includes(required)) throw new Error(`dependabot.yml: missing ${required}`);
+}
+
 const compatibilityPath = path.join(integrationsRoot, "compatibility.json");
 const compatibility = JSON.parse(contents.get(compatibilityPath));
 if (compatibility.schema_version !== 1) throw new Error("compatibility.json: schema_version must be 1");
@@ -280,13 +305,39 @@ const releasePath = path.join(integrationsRoot, "release.json");
 const release = JSON.parse(contents.get(releasePath));
 if (release.schema_version !== 1) throw new Error("release.json: schema_version must be 1");
 assertReleaseIdentity(release);
-if (release.status !== "source_ready") throw new Error("release.json: local manifest status must remain source_ready until remote publication");
-if (release.published_at !== null) throw new Error("release.json: published_at must remain null until remote publication");
+if (release.status !== "release_ready") throw new Error("release.json: immutable artifact status must be release_ready");
 if (compatibility.integration_release !== release.release_version) throw new Error("compatibility.json: integration_release must match release.json");
 const integrationFileNames = files.map(relative);
-if (!Array.isArray(release.bundle_files)
-  || JSON.stringify(release.bundle_files) !== JSON.stringify([...new Set(integrationFileNames)].sort())) {
-  throw new Error("release.json: bundle_files must be the sorted, complete integrations/ file allowlist");
+if (!Array.isArray(release.bundle_files) || !Array.isArray(release.repository_only_files)) {
+  throw new Error("release.json: bundle_files and repository_only_files must be arrays");
+}
+const publicFileAllowlist = [...release.bundle_files, ...release.repository_only_files].sort();
+if (new Set(publicFileAllowlist).size !== publicFileAllowlist.length
+  || JSON.stringify(release.bundle_files) !== JSON.stringify([...release.bundle_files].sort())
+  || JSON.stringify(release.repository_only_files) !== JSON.stringify(["publication.json"])
+  || JSON.stringify(publicFileAllowlist) !== JSON.stringify([...new Set(integrationFileNames)].sort())) {
+  throw new Error("release.json: public file lists must be sorted, disjoint, and complete; publication.json is repository-only");
+}
+
+const publication = JSON.parse(contents.get(path.join(integrationsRoot, "publication.json")));
+if (publication.schema_version !== 1 || publication.release_version !== release.release_version) {
+  throw new Error("publication.json: schema/version must match release.json");
+}
+if (!["ready", "published"].includes(publication.state)) throw new Error("publication.json: invalid state");
+if ((publication.state === "ready") !== (publication.published_at === null)) {
+  throw new Error("publication.json: ready requires null published_at; published requires a timestamp");
+}
+if (publication.published_at !== null && (typeof publication.published_at !== "string" || Number.isNaN(Date.parse(publication.published_at)))) {
+  throw new Error("publication.json: published_at must be an ISO timestamp or null");
+}
+const expectedReleaseUrl = `https://github.com/JoeyMonki/cutenote-integrations/releases/tag/${release.release_tag}`;
+if (publication.repository_url !== "https://github.com/JoeyMonki/cutenote-integrations" || publication.release_url !== expectedReleaseUrl) {
+  throw new Error("publication.json: GitHub repository/release URL mismatch");
+}
+if (publication.artifact?.filename !== `${release.bundle_basename}.zip`
+  || publication.artifact?.checksum_filename !== `${release.bundle_basename}.zip.sha256`
+  || !/^(?:TO_BE_FINALIZED_AFTER_BUILD|[a-f0-9]{64})$/.test(publication.artifact?.sha256 ?? "")) {
+  throw new Error("publication.json: artifact filenames or SHA-256 are invalid");
 }
 
 const requiredVersionedArtifacts = ["mcp", "canonical_skill", "codex_plugin", "claude_plugin", "workbuddy_connector"];

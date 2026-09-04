@@ -67,22 +67,23 @@ async function verify(archivePath) {
 }
 
 async function build(outputDirectory) {
-  if (release.status !== "source_ready" || release.published_at !== null) {
-    throw new Error("release.json must describe an unpublished source_ready candidate");
+  if (release.status !== "release_ready") {
+    throw new Error("release.json must describe an immutable release_ready artifact");
   }
   await mkdir(outputDirectory, { recursive: true });
   const archivePath = path.join(outputDirectory, `${release.bundle_basename}.zip`);
   const files = await listFiles(integrationsRoot);
   const actualFiles = files.map((file) => path.relative(integrationsRoot, file).replaceAll("\\", "/"));
-  if (JSON.stringify(actualFiles) !== JSON.stringify(release.bundle_files)) {
-    throw new Error("release.json.bundle_files must be the sorted, complete integrations/ file allowlist");
+  const publicFiles = [...release.bundle_files, ...(release.repository_only_files ?? [])].sort();
+  if (JSON.stringify(actualFiles) !== JSON.stringify(publicFiles)) {
+    throw new Error("release.json file lists must be the sorted, complete integrations/ public file allowlist");
   }
   const zip = new yazl.ZipFile();
   const destination = createWriteStream(archivePath);
   zip.outputStream.pipe(destination);
 
-  for (const file of files) {
-    const relative = path.relative(integrationsRoot, file).replaceAll("\\", "/");
+  for (const relative of release.bundle_files) {
+    const file = path.join(integrationsRoot, ...relative.split("/"));
     const archiveName = `${release.bundle_basename}/${relative}`;
     zip.addBuffer(normalizePublicFile(relative, await readFile(file)), archiveName, { mtime: fixedMtime, mode: 0o100644 });
   }

@@ -18,12 +18,15 @@ const allowedRootFiles = new Set([
   "PUBLISHING.md",
   "README.md",
   "README.zh-CN.md",
+  "SECURITY.md",
   "compatibility.json",
   "package-lock.json",
   "package.json",
+  "publication.json",
   "release.json"
 ]);
 const allowedDirectories = new Set([
+  ".github",
   "claude-code",
   "codex",
   "docs",
@@ -34,7 +37,7 @@ const allowedDirectories = new Set([
   "skills",
   "workbuddy"
 ]);
-const deniedSegments = new Set([".git", ".github", "app", "data", "deploy", "lib", "node_modules", "supabase"]);
+const deniedSegments = new Set([".git", "app", "data", "deploy", "lib", "node_modules", "supabase"]);
 const ignoredGeneratedSourceEntries = new Set([".git", "dist", "node_modules"]);
 const deniedNames = /(?:^|\/)(?:\.env(?:\..*)?|.*\.(?:key|pem|p12|pfx|sqlite|db))$/i;
 const absolutePathPattern = /(?:^|[\s`"'(])(?:[A-Za-z]:[\\/]|\/(?:Users|home|root|private|var\/folders)\/)/m;
@@ -103,31 +106,41 @@ async function assertNoSymlinkComponents(root, relative) {
 export async function validatePublicSource(integrationsRoot = defaultIntegrationsRoot) {
   const releasePath = path.join(integrationsRoot, "release.json");
   const release = JSON.parse(await readFile(releasePath, "utf8"));
-  if (!Array.isArray(release.bundle_files)) throw new Error("release.json.bundle_files must be an array");
-  const allowlist = release.bundle_files;
-  for (const entry of allowlist) validateAllowlistEntry(entry);
-  if (new Set(allowlist).size !== allowlist.length) throw new Error("release.json.bundle_files contains duplicates");
-  if (JSON.stringify(allowlist) !== JSON.stringify([...allowlist].sort())) {
+  if (!Array.isArray(release.bundle_files) || !Array.isArray(release.repository_only_files)) {
+    throw new Error("release.json bundle_files and repository_only_files must be arrays");
+  }
+  const bundleFiles = release.bundle_files;
+  const repositoryOnlyFiles = release.repository_only_files;
+  const publicFiles = [...bundleFiles, ...repositoryOnlyFiles].sort();
+  for (const entry of publicFiles) validateAllowlistEntry(entry);
+  if (new Set(publicFiles).size !== publicFiles.length) throw new Error("release.json public file lists contain duplicates");
+  if (JSON.stringify(bundleFiles) !== JSON.stringify([...bundleFiles].sort())) {
     throw new Error("release.json.bundle_files must be sorted");
   }
-  for (const required of [".gitattributes", ".gitignore", "LICENSE", "README.md", "README.zh-CN.md", "package-lock.json", "package.json", "release.json", "scripts/export-public-repo.mjs"]) {
-    if (!allowlist.includes(required)) throw new Error(`required public file is not allowlisted: ${required}`);
+  if (JSON.stringify(repositoryOnlyFiles) !== JSON.stringify([...repositoryOnlyFiles].sort())) {
+    throw new Error("release.json.repository_only_files must be sorted");
+  }
+  if (JSON.stringify(repositoryOnlyFiles) !== JSON.stringify(["publication.json"])) {
+    throw new Error("publication.json must be the only repository-only state file");
+  }
+  for (const required of [".gitattributes", ".github/dependabot.yml", ".github/workflows/validate.yml", ".gitignore", "LICENSE", "README.md", "README.zh-CN.md", "SECURITY.md", "package-lock.json", "package.json", "publication.json", "release.json", "scripts/export-public-repo.mjs", "scripts/record-github-release.mjs"]) {
+    if (!publicFiles.includes(required)) throw new Error(`required public file is not allowlisted: ${required}`);
   }
 
   const actual = await listSourceFiles(integrationsRoot);
-  if (JSON.stringify(actual) !== JSON.stringify(allowlist)) {
-    const unexpected = actual.filter((file) => !allowlist.includes(file));
-    const missing = allowlist.filter((file) => !actual.includes(file));
+  if (JSON.stringify(actual) !== JSON.stringify(publicFiles)) {
+    const unexpected = actual.filter((file) => !publicFiles.includes(file));
+    const missing = publicFiles.filter((file) => !actual.includes(file));
     throw new Error(`public source differs from strict allowlist; unexpected=${unexpected.join(",") || "none"}; missing=${missing.join(",") || "none"}`);
   }
 
-  for (const relative of allowlist) {
+  for (const relative of publicFiles) {
     await assertNoSymlinkComponents(integrationsRoot, relative);
     const content = await readFile(path.join(integrationsRoot, ...relative.split("/")));
     const normalizedContent = normalizePublicFile(relative, content);
     if (absolutePathPattern.test(normalizedContent.toString("utf8"))) throw new Error(`local absolute path detected: ${relative}`);
   }
-  return { release, allowlist };
+  return { release, publicFiles };
 }
 
 function assertSafeOutput(outputRoot, repositoryRoot) {
@@ -147,12 +160,12 @@ export async function exportPublicRepository({
   outputRoot = defaultOutputRoot
 } = {}) {
   const resolvedOutput = assertSafeOutput(outputRoot, repositoryRoot);
-  const { release, allowlist } = await validatePublicSource(integrationsRoot);
+  const { release, publicFiles } = await validatePublicSource(integrationsRoot);
   await mkdir(path.dirname(resolvedOutput), { recursive: true });
   const temporaryRoot = await mkdtemp(path.join(path.dirname(resolvedOutput), ".cutenote-public-export-"));
   try {
     const manifestFiles = [];
-    for (const relative of allowlist) {
+    for (const relative of publicFiles) {
       const source = path.resolve(integrationsRoot, ...relative.split("/"));
       assertInside(path.resolve(integrationsRoot), source, `source ${relative}`);
       const destination = path.join(temporaryRoot, ...relative.split("/"));
@@ -179,14 +192,14 @@ export async function exportPublicRepository({
     await writeFile(path.join(temporaryRoot, "SHA256SUMS"), `${checksumEntries.join("\n")}\n`, "utf8");
 
     const stagedFiles = await listSourceFiles(temporaryRoot);
-    const expected = [...allowlist, "PUBLIC-MANIFEST.json", "SHA256SUMS"].sort();
+    const expected = [...publicFiles, "PUBLIC-MANIFEST.json", "SHA256SUMS"].sort();
     if (JSON.stringify(stagedFiles) !== JSON.stringify(expected)) throw new Error("staged public tree contains unexpected files");
 
     // The destination is constrained above. Replacement is deliberately one-way and contains no Git metadata.
     await rm(resolvedOutput, { recursive: true, force: true });
     await rename(temporaryRoot, resolvedOutput);
     console.log(`Exported public repository tree to ${resolvedOutput}`);
-    console.log(`Included ${allowlist.length} allowlisted files plus PUBLIC-MANIFEST.json and SHA256SUMS`);
+    console.log(`Included ${publicFiles.length} allowlisted files plus PUBLIC-MANIFEST.json and SHA256SUMS`);
     return resolvedOutput;
   } catch (error) {
     await rm(temporaryRoot, { recursive: true, force: true });

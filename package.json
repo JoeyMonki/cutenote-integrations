@@ -9,7 +9,8 @@
   "scripts": {
     "check": "node scripts/sync-cutenote-skill.mjs && node scripts/validate-artifacts.mjs",
     "bundle": "npm run check && node scripts/build-release.mjs",
-    "bundle:verify": "node scripts/build-release.mjs --verify"
+    "bundle:verify": "node scripts/build-release.mjs --verify",
+    "publication:record": "node scripts/record-github-release.mjs"
   },
   "devDependencies": {
     "yazl": "^3.3.1"

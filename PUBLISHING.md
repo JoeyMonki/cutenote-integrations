@@ -1,6 +1,6 @@
 # Publishing and version policy for CuteNote integrations
 
-> Status: the official public source repository is live at [github.com/JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations). The MIT license, packaging, checksum, and migration rules are established. No GitHub Release, npm publication, marketplace listing, or remote publication automation is live yet.
+> Status: the official public source repository is live at [github.com/JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations). The v1.0.0 assets are release-ready for the current publication batch. `publication.json` remains `ready` until the GitHub Release succeeds; this document does not claim it is live early. npm publication, marketplace listings, and remote publication automation are not live yet.
 
 ## Unified version contract
 
@@ -12,7 +12,7 @@
 
 Canonical Skill wording may change in a patch release only when it continues to describe the same MCP contract. A Skill change that starts relying on additive MCP behavior is minor. A Skill change that cannot operate against the prior MCP major is major.
 
-`release.json.status` remains `source_ready` and `published_at` remains `null` until a matching remote release is actually published. Local bundle generation does not change either field.
+`release.json.status` is `release_ready` and describes the immutable archive inputs. Remote state lives separately in repository-only `publication.json`, which is deliberately excluded from `bundle_files`. This separation allows the release timestamp to be recorded after successful GitHub publication without changing the ZIP or its SHA-256.
 
 ## Tags, archives, and changelog
 
@@ -23,6 +23,8 @@ Canonical Skill wording may change in a patch release only when it continues to 
 - A stable tag may be created only from the public mirror commit whose checked-in `release.json.release_tag` exactly matches the tag.
 
 In the public checkout, build a deterministic local candidate with `npm run bundle` and verify its checksum with `npm run bundle:verify`. In the private authoring repository, the equivalent commands are `npm run integrations:bundle` and `npm run integrations:bundle:verify`. Rebuilding identical tracked inputs must produce the same SHA-256 checksum.
+
+The public repository workflow runs `npm ci`, `npm run check`, `npm run bundle`, and `npm run bundle:verify` on pushes and pull requests. Third-party actions are pinned to reviewed full commit SHAs, permissions are read-only, and dependency update proposals are scheduled weekly through Dependabot.
 
 ## Breaking schema migration window
 
@@ -52,6 +54,15 @@ The private CuteNote product repository owns every file published from `integrat
 5. Open an automated public-repository pull request. Require its own validation workflow and human review before merge.
 6. Tag the merged public commit and attach release archives/checksums only after platform-specific smoke tests pass.
 
+## Two-stage GitHub Release record
+
+1. While `publication.json.state` is `ready`, build and verify the final ZIP and `.sha256`. Record that digest in `publication.json`; because this file is repository-only, the archive bytes do not change.
+2. Create the GitHub Release and upload those exact verified assets. Do not change the ZIP between verification and upload.
+3. Only after GitHub confirms the Release and both assets are accessible, run `npm run publication:record -- --published-at <exact-ISO-UTC-timestamp>`. In the private authoring repository use `npm run integrations:publication:record -- --published-at <exact-ISO-UTC-timestamp>`.
+4. Publish the resulting `publication.json` state-only change to the source repository. The command verifies the local ZIP and checksum against the recorded digest before changing `state` to `published`.
+
+The state-only commit is not part of the v1.0.0 archive. A failed GitHub operation leaves `publication.json` at `ready` and makes no publication claim.
+
 The publication job should fail closed: unexpected files, deletions, validator failures, a dirty generated snapshot, or a non-fast-forward public branch must stop the run. It must never reconcile public and private trees bidirectionally.
 
 ## Release provenance requirements
@@ -70,4 +81,4 @@ Public pull requests from contributors are welcome as proposals, but maintainers
 
 Rollback means republishing the last known-good private snapshot as a new public commit and release, then withdrawing affected marketplace versions when supported. Do not repair only the public mirror: that would create drift and make the next publication overwrite the emergency fix.
 
-GitHub Release creation, marketplace submission, npm publication, credentials, and remote automation setup remain separate operational steps; this document intentionally does not perform or assume them. The public source repository is already live, and the exported source is licensed under MIT.
+GitHub Release creation remains an explicit two-stage operation described above; it is not performed or assumed by these files. Marketplace submission, npm publication, credentials, and remote automation setup also remain separate. The public source repository is already live, and the exported source is licensed under MIT.

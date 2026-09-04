@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "release_version": "1.0.0",
+  "state": "ready",
+  "published_at": null,
+  "repository_url": "https://github.com/JoeyMonki/cutenote-integrations",
+  "release_url": "https://github.com/JoeyMonki/cutenote-integrations/releases/tag/cutenote-integrations-v1.0.0",
+  "artifact": {
+    "filename": "cutenote-integrations-v1.0.0.zip",
+    "checksum_filename": "cutenote-integrations-v1.0.0.zip.sha256",
+    "sha256": "4c7add98267bd7763b26bde42d7b150951c8c4b47302cfbe9ba9f03a5a8b0a69"
+  }
+}

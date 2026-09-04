@@ -1,8 +1,7 @@
 {
   "schema_version": 1,
   "release_version": "1.0.0",
-  "status": "source_ready",
-  "published_at": null,
+  "status": "release_ready",
   "release_tag": "cutenote-integrations-v1.0.0",
   "bundle_basename": "cutenote-integrations-v1.0.0",
   "artifacts": {
@@ -34,14 +33,20 @@
       "requires_mcp": ">=1.0.0 <2.0.0"
     }
   },
+  "repository_only_files": [
+    "publication.json"
+  ],
   "bundle_files": [
     ".gitattributes",
+    ".github/dependabot.yml",
+    ".github/workflows/validate.yml",
     ".gitignore",
     "CHANGELOG.md",
     "LICENSE",
     "PUBLISHING.md",
     "README.md",
     "README.zh-CN.md",
+    "SECURITY.md",
     "claude-code/cutenote/.claude-plugin/plugin.json",
     "claude-code/cutenote/.mcp.json",
     "claude-code/cutenote/skills/cutenote/SKILL.md",
@@ -70,6 +75,7 @@
     "scripts/build-release.mjs",
     "scripts/content-policy.mjs",
     "scripts/export-public-repo.mjs",
+    "scripts/record-github-release.mjs",
     "scripts/sync-cutenote-skill.mjs",
     "scripts/validate-artifacts.mjs",
     "scripts/version-policy.mjs",

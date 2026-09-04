@@ -44,6 +44,7 @@ See the human-readable [compatibility matrix](docs/compatibility.md) and machine
 - [Starter prompts](docs/starter-prompts.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Security and data handling](docs/security.md)
+- [Security vulnerability reporting](SECURITY.md)
 - [Data flow](docs/data-flow.md)
 - [Compatibility policy and matrix](docs/compatibility.md)
 - [Publishing, versioning, and source-of-truth policy](PUBLISHING.md)
@@ -55,12 +56,13 @@ See the human-readable [compatibility matrix](docs/compatibility.md) and machine
 - Website: [www.cutenote.app](https://www.cutenote.app/)
 - Install guide: [www.cutenote.app/ai-skill](https://www.cutenote.app/ai-skill)
 - Official public source: [github.com/JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations)
+- Security reports: [GitHub Private Vulnerability Reporting](https://github.com/JoeyMonki/cutenote-integrations/security/advisories/new)
 - Privacy policy: **TODO — no confirmed public URL yet**
 - Terms of service: **TODO — no confirmed public URL yet**
 - Support: **TODO — no confirmed public support URL yet**
 - Service status: **TODO — no confirmed public status page yet**
 
-The official public source repository is [JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations). It is a one-way generated mirror of the private authoring source. The GitHub source repository is live; a GitHub Release, npm publication, marketplace listing, and remote publication automation are not live yet. See [PUBLISHING.md](PUBLISHING.md).
+The official public source repository is [JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations). It is a one-way generated mirror of the private authoring source. The GitHub source repository is live. The v1.0.0 assets are release-ready for the current publication batch, but this document does not claim the GitHub Release is live; [`publication.json`](publication.json) is the machine-readable publication record. npm publication, marketplace listings, and remote publication automation are not live yet. See [PUBLISHING.md](PUBLISHING.md).
 
 ## Validate a source checkout
 
