@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "cutenote": {
+      "type": "streamableHttp",
+      "url": "https://www.cutenote.app/mcp",
+      "timeout": 30000
+    }
+  }
+}

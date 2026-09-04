@@ -1,0 +1,24 @@
+{
+  "name": "cutenote",
+  "version": "1.0.0",
+  "description": "Create, read, and export CuteNote visual notes through OAuth MCP.",
+  "author": {
+    "name": "CuteNote"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "CuteNote",
+    "shortDescription": "Create and export visual notes with OAuth.",
+    "longDescription": "Turn text and supported links into long-image notes, mind maps, or Markdown, then read and export them from Codex.",
+    "developerName": "CuteNote",
+    "category": "Productivity",
+    "capabilities": ["MCP", "Skills"],
+    "websiteURL": "https://www.cutenote.app/",
+    "defaultPrompt": [
+      "Turn this content into a long-image note.",
+      "Create a mind map from this link.",
+      "Export my latest CuteNote as Markdown."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

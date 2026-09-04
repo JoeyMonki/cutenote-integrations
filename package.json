@@ -1,0 +1,17 @@
+{
+  "name": "cutenote-integrations",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.18.1"
+  },
+  "scripts": {
+    "check": "node scripts/sync-cutenote-skill.mjs && node scripts/validate-artifacts.mjs",
+    "bundle": "npm run check && node scripts/build-release.mjs",
+    "bundle:verify": "node scripts/build-release.mjs --verify"
+  },
+  "devDependencies": {
+    "yazl": "^3.3.1"
+  }
+}

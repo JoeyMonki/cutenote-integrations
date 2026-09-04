@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "release_version": "1.0.0",
+  "status": "source_ready",
+  "published_at": null,
+  "release_tag": "cutenote-integrations-v1.0.0",
+  "bundle_basename": "cutenote-integrations-v1.0.0",
+  "artifacts": {
+    "mcp": {
+      "version": "1.0.0",
+      "source": "https://www.cutenote.app/mcp"
+    },
+    "canonical_skill": {
+      "version": "1.0.0",
+      "source": "skills/cutenote/SKILL.md",
+      "requires_mcp": ">=1.0.0 <2.0.0"
+    },
+    "codex_plugin": {
+      "version": "1.0.0",
+      "source": "codex/cutenote/.codex-plugin/plugin.json",
+      "bundles_skill": "1.0.0",
+      "requires_mcp": ">=1.0.0 <2.0.0"
+    },
+    "claude_plugin": {
+      "version": "1.0.0",
+      "source": "claude-code/cutenote/.claude-plugin/plugin.json",
+      "bundles_skill": "1.0.0",
+      "requires_mcp": ">=1.0.0 <2.0.0"
+    },
+    "workbuddy_connector": {
+      "version": "1.0.0",
+      "source": "workbuddy/cutenote/connector-meta.json",
+      "bundles_skill": "1.0.0",
+      "requires_mcp": ">=1.0.0 <2.0.0"
+    }
+  },
+  "bundle_files": [
+    "CHANGELOG.md",
+    "LICENSE",
+    "PUBLISHING.md",
+    "README.md",
+    "README.zh-CN.md",
+    "claude-code/cutenote/.claude-plugin/plugin.json",
+    "claude-code/cutenote/.mcp.json",
+    "claude-code/cutenote/skills/cutenote/SKILL.md",
+    "codex/cutenote/.codex-plugin/plugin.json",
+    "codex/cutenote/.mcp.json",
+    "codex/cutenote/skills/cutenote/SKILL.md",
+    "codex/cutenote/skills/cutenote/agents/openai.yaml",
+    "compatibility.json",
+    "docs/authentication.md",
+    "docs/compatibility.md",
+    "docs/data-flow.md",
+    "docs/security.md",
+    "docs/starter-prompts.md",
+    "docs/tools.md",
+    "docs/troubleshooting.md",
+    "hermes/config.yaml",
+    "marketplaces/claude/connector-review-materials.md",
+    "marketplaces/claude/review-test-scenarios.json",
+    "marketplaces/openai/review-test-cases.json",
+    "marketplaces/openai/starter-prompts.json",
+    "marketplaces/openai/submission-materials.md",
+    "openclaw/config.jsonc",
+    "package-lock.json",
+    "package.json",
+    "release.json",
+    "scripts/build-release.mjs",
+    "scripts/export-public-repo.mjs",
+    "scripts/sync-cutenote-skill.mjs",
+    "scripts/validate-artifacts.mjs",
+    "scripts/version-policy.mjs",
+    "skills/cutenote/SKILL.md",
+    "skills/cutenote/tests/golden-prompts.json",
+    "workbuddy/cutenote/connector-meta.json",
+    "workbuddy/cutenote/icon.svg",
+    "workbuddy/cutenote/mcp.json",
+    "workbuddy/cutenote/skills/cutenote/SKILL.md"
+  ]
+}

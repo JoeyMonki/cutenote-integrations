@@ -1,0 +1,11 @@
+mcp_servers:
+  cutenote:
+    url: "https://www.cutenote.app/mcp"
+    auth: oauth
+    enabled: true
+    timeout: 120
+    connect_timeout: 60
+    tools:
+      include: [create_note, get_generation_job, list_notes, get_note, export_note]
+      resources: false
+      prompts: false

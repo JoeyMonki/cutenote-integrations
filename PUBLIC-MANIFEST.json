@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "name": "cutenote-integrations",
+  "version": "1.0.0",
+  "release_tag": "cutenote-integrations-v1.0.0",
+  "license": "MIT",
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "c957e74b330242dbb2b94463f282120c051d7e5d71a5bf0c510638ff7008a130",
+      "size": 826
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "78a95355dc80b056bed875c1351de9993f474e00fa1cee4244a07d7add0a063e",
+      "size": 1078
+    },
+    {
+      "path": "PUBLISHING.md",
+      "sha256": "d2138caa1b75bfb7b0da5b3a53a05f6d3850db2da000f6b8a3ef5ff5846df7a3",
+      "size": 6576
+    },
+    {
+      "path": "README.md",
+      "sha256": "8628710eca7e3b49f4388130d3d41e082a79e4a98a26a197e1eecf1c28a2c0e7",
+      "size": 4359
+    },
+    {
+      "path": "README.zh-CN.md",
+      "sha256": "655fffb30fdce0de8fd3a769d357e3c7b1b60cfd539b5eef4abdbe11b8877dfd",
+      "size": 3958
+    },
+    {
+      "path": "claude-code/cutenote/.claude-plugin/plugin.json",
+      "sha256": "489fc5a3a76d8e75c3c13ecdb8e5a6ea80ce15fe1a4d4045749f9b860fe22824",
+      "size": 169
+    },
+    {
+      "path": "claude-code/cutenote/.mcp.json",
+      "sha256": "6bbdf2255ef4d1e219587d44f76373791dd21c388c1439deb5ee784ca1319654",
+      "size": 124
+    },
+    {
+      "path": "claude-code/cutenote/skills/cutenote/SKILL.md",
+      "sha256": "10dc9f82e514f242741086fa708dc5f19ec7afb8cb8fb61eee61da4750702cd0",
+      "size": 2526
+    },
+    {
+      "path": "codex/cutenote/.codex-plugin/plugin.json",
+      "sha256": "2cc271fff811c35d1c99b88b2ba53a41f2920e988bbb6cfd102e994bc6884d5c",
+      "size": 823
+    },
+    {
+      "path": "codex/cutenote/.mcp.json",
+      "sha256": "6bbdf2255ef4d1e219587d44f76373791dd21c388c1439deb5ee784ca1319654",
+      "size": 124
+    },
+    {
+      "path": "codex/cutenote/skills/cutenote/SKILL.md",
+      "sha256": "10dc9f82e514f242741086fa708dc5f19ec7afb8cb8fb61eee61da4750702cd0",
+      "size": 2526
+    },
+    {
+      "path": "codex/cutenote/skills/cutenote/agents/openai.yaml",
+      "sha256": "20bb711a166e0c874a9991f35f208125f50779918fba90365deb8f3c5a7d8ab6",
+      "size": 402
+    },
+    {
+      "path": "compatibility.json",
+      "sha256": "e79084c59e3e50bc73035b5ad8fe3aaec616e40dd3b5775b033743de2a124441",
+      "size": 3011
+    },
+    {
+      "path": "docs/authentication.md",
+      "sha256": "9acb8e4b658de23582fc0b90c5dc812e3295c61cc27d344796f74030a2c5654a",
+      "size": 2804
+    },
+    {
+      "path": "docs/compatibility.md",
+      "sha256": "f10581f0295ca05a551067e36b6d5a5ed30649a5938782b60b26dd2b249809e8",
+      "size": 3293
+    },
+    {
+      "path": "docs/data-flow.md",
+      "sha256": "dfde560261b3751fe3f8d00769fb695f46c33a5b2bba4b45c9fde7f0a87fb77e",
+      "size": 2207
+    },
+    {
+      "path": "docs/security.md",
+      "sha256": "40c6a87fa03f97d34d42537ba001f0b88f2dfe9eb73d683c507fc4229e46e77f",
+      "size": 3847
+    },
+    {
+      "path": "docs/starter-prompts.md",
+      "sha256": "deab690f329f7445850142e06877f10366c3bef112206103ddfe56f0bb44a236",
+      "size": 1767
+    },
+    {
+      "path": "docs/tools.md",
+      "sha256": "bdd07f7a97569f6468f1709c9ac0c15e8c6e49ba3d7ca91456e408728e476df6",
+      "size": 2682
+    },
+    {
+      "path": "docs/troubleshooting.md",
+      "sha256": "f3b7a655a8ee71cf3fc471d2f7f15e03297f62d9eff3fd1f24170ce77186f476",
+      "size": 2960
+    },
+    {
+      "path": "hermes/config.yaml",
+      "sha256": "22af87139136e3e2924f85a2d73b31208f58642fcb8822710e03c897b27d1478",
+      "size": 290
+    },
+    {
+      "path": "marketplaces/claude/connector-review-materials.md",
+      "sha256": "ba9b501a6e75eb239d0c0dda57fa666f95ff22ba81f96afd2fc7f5c319b33dae",
+      "size": 5341
+    },
+    {
+      "path": "marketplaces/claude/review-test-scenarios.json",
+      "sha256": "f0d4c484482c5ca1643a569eb9f5ba07862016a946107ee72570677405d1cc13",
+      "size": 2374
+    },
+    {
+      "path": "marketplaces/openai/review-test-cases.json",
+      "sha256": "737c5ab5056494eee6130ae4eaa8d478745ac716cf6ccf6467b276cb644a4072",
+      "size": 4337
+    },
+    {
+      "path": "marketplaces/openai/starter-prompts.json",
+      "sha256": "38c6db9be62754b99c0d7e15f7828a456f4d14a413231884781c3ce07631cadd",
+      "size": 2228
+    },
+    {
+      "path": "marketplaces/openai/submission-materials.md",
+      "sha256": "f0463570b3af44a965f339b7b556aeb67c0c21bb382e5620d77e6663884bd7d0",
+      "size": 4680
+    },
+    {
+      "path": "openclaw/config.jsonc",
+      "sha256": "7615e1d27380260558a4496930b65d3efc6ceff8ec1a400c68b65f54f6134271",
+      "size": 192
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "e426dbeb9bbdb078cd2f0c2c31a987878eb43c818ee05a387b9514476f15b506",
+      "size": 1070
+    },
+    {
+      "path": "package.json",
+      "sha256": "74e026089c1a60a6af0c1af5f6da0abf440cbbf3a3c7a1dafde8cb1c11e7af35",
+      "size": 432
+    },
+    {
+      "path": "release.json",
+      "sha256": "49db64ac144689551985a5763c4deebc1a5d7a8887924a587d2a97d404df9338",
+      "size": 2513
+    },
+    {
+      "path": "scripts/build-release.mjs",
+      "sha256": "5e07781f976f2318a8b02fd808650a2ed39d27c0339c51da0837932672491fe8",
+      "size": 4865
+    },
+    {
+      "path": "scripts/export-public-repo.mjs",
+      "sha256": "abcd026752172decc1254722f830f0ad7a5ac3c5a947eb08bd36c68a15de6efa",
+      "size": 9342
+    },
+    {
+      "path": "scripts/sync-cutenote-skill.mjs",
+      "sha256": "579440dceeea53575116e4cdf44fe65ee91d9d3d096a7f42033546249ac1dd49",
+      "size": 1343
+    },
+    {
+      "path": "scripts/validate-artifacts.mjs",
+      "sha256": "48005e5801a584a22f593c22112d02e7ec9aac84cc5f21416c52e4e5cf641e12",
+      "size": 18452
+    },
+    {
+      "path": "scripts/version-policy.mjs",
+      "sha256": "4409f17d6ab1bdbbdffd9be950b0ee2f0bdd2f4357a295dbc24e1c610d992c2f",
+      "size": 864
+    },
+    {
+      "path": "skills/cutenote/SKILL.md",
+      "sha256": "10dc9f82e514f242741086fa708dc5f19ec7afb8cb8fb61eee61da4750702cd0",
+      "size": 2526
+    },
+    {
+      "path": "skills/cutenote/tests/golden-prompts.json",
+      "sha256": "3e7c3c40dd333f186fc57490344467834f42df2291e3e5126b0b82c18ccda2a9",
+      "size": 4076
+    },
+    {
+      "path": "workbuddy/cutenote/connector-meta.json",
+      "sha256": "58622ccb5913a2f7d4c28a390364f719106d8df7f47e704fb187cc8f7e13c663",
+      "size": 613
+    },
+    {
+      "path": "workbuddy/cutenote/icon.svg",
+      "sha256": "b70350a22f20339706132ceee01d45d1ba0540a4bfc2e7cee614af75aa495f2b",
+      "size": 315
+    },
+    {
+      "path": "workbuddy/cutenote/mcp.json",
+      "sha256": "5bb426a9cb71b9caca30fa0c8b4d5726e1c41361b44519bd18cd8b3360e8c70c",
+      "size": 159
+    },
+    {
+      "path": "workbuddy/cutenote/skills/cutenote/SKILL.md",
+      "sha256": "10dc9f82e514f242741086fa708dc5f19ec7afb8cb8fb61eee61da4750702cd0",
+      "size": 2526
+    }
+  ]
+}

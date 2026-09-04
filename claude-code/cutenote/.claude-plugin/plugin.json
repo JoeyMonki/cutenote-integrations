@@ -1,0 +1,6 @@
+{
+  "name": "cutenote",
+  "version": "1.0.0",
+  "description": "Create, read, and export CuteNote visual notes through OAuth MCP.",
+  "author": { "name": "CuteNote" }
+}

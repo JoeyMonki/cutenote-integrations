@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "platform": "openai",
+  "status": "draft_for_portal_entry",
+  "prompts": [
+    {
+      "id": "video-to-long-image",
+      "title": { "zh-CN": "视频转长图", "en": "Video to long image" },
+      "prompt": {
+        "zh-CN": "把这个公开视频链接整理成中文长图笔记，生成完成后导出全部 PNG 页面。",
+        "en": "Turn this public video link into an English long-image note, then export every PNG page when generation completes."
+      },
+      "expected_tools": ["create_note", "get_generation_job", "export_note"]
+    },
+    {
+      "id": "web-page-to-markdown",
+      "title": { "zh-CN": "网页转 Markdown", "en": "Web page to Markdown" },
+      "prompt": {
+        "zh-CN": "把这个公开网页整理成详细 Markdown 笔记，并给我完整内容和下载链接。",
+        "en": "Convert this public web page into a detailed Markdown note and give me the complete content and download link."
+      },
+      "expected_tools": ["create_note", "get_generation_job", "export_note"]
+    },
+    {
+      "id": "text-to-mind-map",
+      "title": { "zh-CN": "文本转脑图", "en": "Text to mind map" },
+      "prompt": {
+        "zh-CN": "把我提供的长文本整理成脑图，生成完成后导出 PNG。",
+        "en": "Turn the long text I provide into a mind map and export it as PNG when generation completes."
+      },
+      "expected_tools": ["create_note", "get_generation_job", "export_note"]
+    },
+    {
+      "id": "list-notes",
+      "title": { "zh-CN": "列出笔记", "en": "List notes" },
+      "prompt": {
+        "zh-CN": "列出我最近的 CuteNote 笔记，不要创建新笔记。",
+        "en": "List my recent CuteNote notes without creating a new note."
+      },
+      "expected_tools": ["list_notes"]
+    },
+    {
+      "id": "re-export-note",
+      "title": { "zh-CN": "重新导出", "en": "Re-export a note" },
+      "prompt": {
+        "zh-CN": "上次的下载链接过期了，请把我指定的已有笔记重新导出，不要重新生成笔记。",
+        "en": "My previous download link expired. Re-export the existing note I specify without regenerating it."
+      },
+      "expected_tools": ["export_note"]
+    }
+  ]
+}

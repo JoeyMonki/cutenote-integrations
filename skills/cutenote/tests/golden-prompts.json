@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "video-to-long-image",
+      "prompts": {
+        "zh-CN": "把这个公开视频做成一张中文长图：https://example.com/video/123",
+        "en": "Turn this public video into an English long image: https://example.com/video/123"
+      },
+      "expected": {
+        "intent": "create",
+        "input_kind": "video_link",
+        "output_type": "long_image",
+        "tools": ["create_note", "get_generation_job", "export_note"],
+        "export_format": "png"
+      }
+    },
+    {
+      "id": "web-page-to-markdown",
+      "prompts": {
+        "zh-CN": "把这个公开网页整理成详细 Markdown 笔记：https://example.com/article",
+        "en": "Convert this public web page into a detailed Markdown note: https://example.com/article"
+      },
+      "expected": {
+        "intent": "create",
+        "input_kind": "web_page",
+        "output_type": "detailed_markdown",
+        "tools": ["create_note", "get_generation_job", "export_note"],
+        "export_format": "markdown"
+      }
+    },
+    {
+      "id": "long-text-to-mind-map",
+      "prompts": {
+        "zh-CN": "请把我附上的长文本整理成脑图，并导出 PNG。",
+        "en": "Turn the long text I attached into a mind map and export it as PNG."
+      },
+      "expected": {
+        "intent": "create",
+        "input_kind": "long_text",
+        "output_type": "mind_map",
+        "tools": ["create_note", "get_generation_job", "export_note"],
+        "export_format": "png"
+      }
+    },
+    {
+      "id": "list-existing-notes",
+      "prompts": {
+        "zh-CN": "列出我最近的 CuteNote 笔记，不要新建笔记。",
+        "en": "List my recent CuteNote notes without creating a new note."
+      },
+      "expected": {
+        "intent": "list",
+        "input_kind": "existing_note",
+        "tools": ["list_notes"]
+      }
+    },
+    {
+      "id": "read-existing-note",
+      "prompts": {
+        "zh-CN": "读取这篇已有笔记的内容：note_demo_123。",
+        "en": "Read the contents of this existing note: note_demo_123."
+      },
+      "expected": {
+        "intent": "read",
+        "input_kind": "existing_note",
+        "tools": ["get_note"]
+      }
+    },
+    {
+      "id": "re-export-existing-note",
+      "prompts": {
+        "zh-CN": "把已有笔记 note_demo_123 重新导出为 PNG，不要重新生成。",
+        "en": "Re-export existing note note_demo_123 as PNG without regenerating it."
+      },
+      "expected": {
+        "intent": "export",
+        "input_kind": "existing_note",
+        "tools": ["export_note"],
+        "export_format": "png"
+      }
+    },
+    {
+      "id": "expired-link-re-export",
+      "prompts": {
+        "zh-CN": "上次导出的下载链接过期了，请为笔记 note_demo_123 重新生成 Markdown 下载链接。",
+        "en": "The previous download link expired. Create a fresh Markdown export link for note_demo_123."
+      },
+      "expected": {
+        "intent": "export",
+        "input_kind": "existing_note",
+        "tools": ["export_note"],
+        "export_format": "markdown"
+      }
+    },
+    {
+      "id": "installation-check-without-content",
+      "prompts": {
+        "zh-CN": "检查 CuteNote 工具是否安装好了，但不要创建测试笔记。",
+        "en": "Check whether the CuteNote tools are installed, but do not create a test note."
+      },
+      "expected": {
+        "intent": "capability_check",
+        "input_kind": "none",
+        "tools": [],
+        "must_not_call": ["create_note"]
+      }
+    },
+    {
+      "id": "oauth-without-shared-secret",
+      "prompts": {
+        "zh-CN": "连接我的 CuteNote 账号；需要授权时打开浏览器，不要让我粘贴任何密钥。",
+        "en": "Connect my CuteNote account using browser authorization; do not ask me to paste any credential."
+      },
+      "expected": {
+        "intent": "authenticate",
+        "input_kind": "none",
+        "tools": [],
+        "browser_oauth": true,
+        "must_not_request_credentials": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "mcp": {
+    "servers": {
+      "cutenote": {
+        "url": "https://www.cutenote.app/mcp",
+        "transport": "streamable-http",
+        "auth": "oauth"
+      }
+    }
+  }
+}

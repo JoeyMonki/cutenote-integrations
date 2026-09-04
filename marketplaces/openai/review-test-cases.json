@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "platform": "openai",
+  "status": "draft_requires_reviewer_fixtures",
+  "fixture_requirements": [
+    "A reviewer account with sample notes and no MFA, SMS, email-confirmation, or private-network dependency",
+    "One stable public video URL owned by or licensed to the publisher",
+    "One stable public article URL owned by or licensed to the publisher",
+    "One non-sensitive long-text fixture",
+    "One completed reviewer-owned note ID with PNG and Markdown exports",
+    "One completed note ID owned by a different isolation-test account",
+    "One known unsupported public URL"
+  ],
+  "positive": [
+    {
+      "id": "positive-video-long-image",
+      "user_prompt": "Turn the reviewer public video into an English long-image note and export every PNG page.",
+      "expected_behavior": "Call create_note with output_type long_image, poll get_generation_job with the returned timing guidance until a terminal state, and call export_note only after completed.",
+      "expected_result_shape": "A completed note ID followed by page_count and all ordered PNG download URLs; no claim of completion before the job is completed.",
+      "fixture_data": ["reviewer_public_video_url"]
+    },
+    {
+      "id": "positive-page-markdown",
+      "user_prompt": "Convert the reviewer public article into a detailed Markdown note and export it.",
+      "expected_behavior": "Call create_note with output_type detailed_markdown, poll to completion, then call export_note with format markdown.",
+      "expected_result_shape": "Markdown content when within the inline limit, plus a complete signed download URL, character count, and digest.",
+      "fixture_data": ["reviewer_public_article_url"]
+    },
+    {
+      "id": "positive-text-mind-map",
+      "user_prompt": "Turn the reviewer long-text fixture into a Chinese mind map and export it as PNG.",
+      "expected_behavior": "Call create_note with output_type mind_map and locale zh-CN, poll to completion, then call export_note with format png.",
+      "expected_result_shape": "A signed PNG download URL together with the mind-map tree and outline.",
+      "fixture_data": ["reviewer_long_text"]
+    },
+    {
+      "id": "positive-list-notes",
+      "user_prompt": "List my five most recent CuteNote notes without creating anything.",
+      "expected_behavior": "Call list_notes with limit 5 and do not call create_note.",
+      "expected_result_shape": "At most five reviewer-owned note summaries and an optional pagination cursor.",
+      "fixture_data": ["reviewer_account_with_sample_notes"]
+    },
+    {
+      "id": "positive-re-export",
+      "user_prompt": "The old link expired. Re-export the reviewer-owned note as Markdown without regenerating it.",
+      "expected_behavior": "Call export_note with the existing note ID and format markdown; do not call create_note.",
+      "expected_result_shape": "Fresh Markdown content or preview and a new signed download URL with expires_in_seconds.",
+      "fixture_data": ["reviewer_owned_note_id"]
+    }
+  ],
+  "negative": [
+    {
+      "id": "negative-missing-content",
+      "user_prompt_or_scenario": "Check whether CuteNote works, but do not create a test note.",
+      "expected_safe_behavior": "Explain the available capabilities or authentication need without calling create_note; ask for content only if the user later requests generation.",
+      "why_not_complete": "There is no user-provided content and the user explicitly prohibited creating a test note."
+    },
+    {
+      "id": "negative-unsupported-url",
+      "user_prompt_or_scenario": "Create a note from the known unsupported URL fixture.",
+      "expected_safe_behavior": "Return the stable unsupported_input error or generation blocked result, explain the limitation, and do not fabricate an artifact.",
+      "why_not_complete": "The source cannot be ingested through the supported public-source workflow."
+    },
+    {
+      "id": "negative-cross-user-access",
+      "user_prompt_or_scenario": "Read and export the isolation-test note that belongs to another reviewer account.",
+      "expected_safe_behavior": "Return note_not_found for both get_note and export_note, reveal no note metadata, and do not request broader credentials.",
+      "why_not_complete": "The authenticated user does not own the requested note."
+    }
+  ]
+}

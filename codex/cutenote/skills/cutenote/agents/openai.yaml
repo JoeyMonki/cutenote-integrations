@@ -1,0 +1,12 @@
+interface:
+  display_name: "CuteNote"
+  short_description: "Create and export visual notes through CuteNote OAuth MCP"
+  default_prompt: "Use $cutenote to turn this content into a visual note."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "cutenote"
+      description: "CuteNote note generation and export service"
+      transport: "streamable_http"
+      url: "https://www.cutenote.app/mcp"

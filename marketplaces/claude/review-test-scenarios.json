@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "platform": "claude",
+  "status": "draft_requires_real_client_and_reviewer_fixtures",
+  "core_examples": [
+    {
+      "id": "create-visual-note",
+      "prompt": "Create a long-image note from the reviewer-owned public article and export every PNG page.",
+      "expected": "OAuth completes without pasted credentials; create_note starts one job; polling follows server timing; all PNG pages are delivered only after completion."
+    },
+    {
+      "id": "create-mind-map",
+      "prompt": "Turn the reviewer long-text fixture into a mind map and export a PNG.",
+      "expected": "The completed response contains the mind-map structure and outline plus a signed PNG URL."
+    },
+    {
+      "id": "list-and-re-export",
+      "prompt": "List my recent notes, then re-export the reviewer-owned completed note as Markdown.",
+      "expected": "Only notes owned by the authenticated user are listed; export_note returns complete Markdown or a preview and fresh signed URL without regenerating the note."
+    }
+  ],
+  "security_and_failure": [
+    {
+      "id": "authorization-denied",
+      "scenario": "The reviewer declines browser OAuth consent.",
+      "expected": "Claude reports that authorization was declined, does not request a credential, and performs no tool call requiring authorization."
+    },
+    {
+      "id": "unsupported-source",
+      "scenario": "The reviewer asks for a note from the known unsupported URL fixture.",
+      "expected": "CuteNote returns a stable unsupported or blocked result and Claude does not invent output."
+    },
+    {
+      "id": "cross-user-isolation",
+      "scenario": "The reviewer requests a note ID owned by the isolation-test account.",
+      "expected": "Read and export both return note_not_found without revealing title, source, owner, or artifact URLs."
+    },
+    {
+      "id": "expired-artifact",
+      "scenario": "The reviewer opens an expired signed artifact URL.",
+      "expected": "The URL fails; Claude calls export_note for the owned note to obtain a fresh URL and does not retry or modify the expired URL."
+    },
+    {
+      "id": "no-content-capability-check",
+      "scenario": "The reviewer asks whether CuteNote is connected and explicitly forbids creating a sample note.",
+      "expected": "Claude does not call create_note and does not consume generation quota."
+    }
+  ]
+}

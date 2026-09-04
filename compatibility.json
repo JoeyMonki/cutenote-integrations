@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "integration_release": "1.0.0",
+  "status_definitions": {
+    "verified": "Current named client version passed the recorded end-to-end acceptance flow.",
+    "compatible": "Required protocol capabilities are confirmed, but the complete acceptance flow was not rerun for this release.",
+    "adapter_required": "The client needs an adapter or thin plugin for one or more required capabilities.",
+    "experimental": "A source artifact exists and passes static checks, but runtime behavior is not yet verified.",
+    "unsupported": "The client is confirmed to lack a required capability.",
+    "unknown": "Current client capabilities or behavior have not been established."
+  },
+  "clients": [
+    { "id": "codex", "name": "Codex", "status": "experimental", "client_version": null, "last_verified_at": null, "artifact": "codex/cutenote", "evidence": "Source plugin passes repository static validation; no recorded end-to-end client run." },
+    { "id": "claude-code", "name": "Claude Code", "status": "experimental", "client_version": null, "last_verified_at": null, "artifact": "claude-code/cutenote", "evidence": "Source plugin passes repository static validation; no recorded end-to-end client run." },
+    { "id": "workbuddy", "name": "WorkBuddy", "status": "experimental", "client_version": null, "last_verified_at": null, "artifact": "workbuddy/cutenote", "evidence": "Source connector passes repository static validation; no recorded end-to-end client run." },
+    { "id": "openclaw", "name": "OpenClaw", "status": "experimental", "client_version": null, "last_verified_at": null, "artifact": "openclaw/config.jsonc", "evidence": "Configuration example passes repository static validation; no recorded end-to-end client run." },
+    { "id": "hermes", "name": "Hermes Agent", "status": "experimental", "client_version": null, "last_verified_at": null, "artifact": "hermes/config.yaml", "evidence": "Configuration example passes repository static validation; no recorded end-to-end client run." },
+    { "id": "trae", "name": "TRAE", "status": "unknown", "client_version": null, "last_verified_at": null, "artifact": null, "evidence": "No package or recorded protocol test." },
+    { "id": "doubao", "name": "Doubao", "status": "unknown", "client_version": null, "last_verified_at": null, "artifact": null, "evidence": "No package or recorded protocol test." },
+    { "id": "piagent", "name": "PiAgent", "status": "unknown", "client_version": null, "last_verified_at": null, "artifact": null, "evidence": "No package or recorded protocol test." },
+    { "id": "deepseek-harness", "name": "DeepSeek harness", "status": "unknown", "client_version": null, "last_verified_at": null, "artifact": null, "evidence": "No package or recorded protocol test." },
+    { "id": "other-ai", "name": "Other MCP-capable AI", "status": "unknown", "client_version": null, "last_verified_at": null, "artifact": null, "evidence": "Compatibility must be evaluated per named client and version." }
+  ]
+}
