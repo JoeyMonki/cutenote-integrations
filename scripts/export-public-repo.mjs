@@ -1,8 +1,9 @@
 import { createHash } from "node:crypto";
-import { cp, lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
+import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { normalizePublicFile } from "./content-policy.mjs";
 
 const scriptPath = fileURLToPath(import.meta.url);
 const defaultIntegrationsRoot = path.resolve(path.dirname(scriptPath), "..");
@@ -10,6 +11,8 @@ const defaultRepositoryRoot = path.resolve(defaultIntegrationsRoot, "..");
 const defaultOutputRoot = path.join(defaultRepositoryRoot, "dist", "public-repo", "cutenote-integrations");
 
 const allowedRootFiles = new Set([
+  ".gitattributes",
+  ".gitignore",
   "CHANGELOG.md",
   "LICENSE",
   "PUBLISHING.md",
@@ -32,6 +35,7 @@ const allowedDirectories = new Set([
   "workbuddy"
 ]);
 const deniedSegments = new Set([".git", ".github", "app", "data", "deploy", "lib", "node_modules", "supabase"]);
+const ignoredGeneratedSourceEntries = new Set([".git", "dist", "node_modules"]);
 const deniedNames = /(?:^|\/)(?:\.env(?:\..*)?|.*\.(?:key|pem|p12|pfx|sqlite|db))$/i;
 const absolutePathPattern = /(?:^|[\s`"'(])(?:[A-Za-z]:[\\/]|\/(?:Users|home|root|private|var\/folders)\/)/m;
 
@@ -77,12 +81,13 @@ async function listSourceFiles(directory, base = directory) {
     const stat = await lstat(absolute);
     const relative = posixPath(path.relative(base, absolute));
     if (stat.isSymbolicLink()) throw new Error(`symbolic links are not publishable: ${relative}`);
+    if (!stat.isDirectory() && !stat.isFile()) throw new Error(`unsupported filesystem entry: ${relative}`);
+    if (directory === base && ignoredGeneratedSourceEntries.has(entry.name)) continue;
     if (stat.isDirectory()) files.push(...await listSourceFiles(absolute, base));
     else if (stat.isFile()) {
       if (stat.nlink !== 1) throw new Error(`hard-linked files are not publishable: ${relative}`);
       files.push(relative);
     }
-    else throw new Error(`unsupported filesystem entry: ${relative}`);
   }
   return files.sort();
 }
@@ -105,7 +110,7 @@ export async function validatePublicSource(integrationsRoot = defaultIntegration
   if (JSON.stringify(allowlist) !== JSON.stringify([...allowlist].sort())) {
     throw new Error("release.json.bundle_files must be sorted");
   }
-  for (const required of ["LICENSE", "README.md", "README.zh-CN.md", "package-lock.json", "package.json", "release.json", "scripts/export-public-repo.mjs"]) {
+  for (const required of [".gitattributes", ".gitignore", "LICENSE", "README.md", "README.zh-CN.md", "package-lock.json", "package.json", "release.json", "scripts/export-public-repo.mjs"]) {
     if (!allowlist.includes(required)) throw new Error(`required public file is not allowlisted: ${required}`);
   }
 
@@ -119,8 +124,8 @@ export async function validatePublicSource(integrationsRoot = defaultIntegration
   for (const relative of allowlist) {
     await assertNoSymlinkComponents(integrationsRoot, relative);
     const content = await readFile(path.join(integrationsRoot, ...relative.split("/")));
-    if (content.includes(0)) throw new Error(`binary file is not permitted by this public export: ${relative}`);
-    if (absolutePathPattern.test(content.toString("utf8"))) throw new Error(`local absolute path detected: ${relative}`);
+    const normalizedContent = normalizePublicFile(relative, content);
+    if (absolutePathPattern.test(normalizedContent.toString("utf8"))) throw new Error(`local absolute path detected: ${relative}`);
   }
   return { release, allowlist };
 }
@@ -152,8 +157,8 @@ export async function exportPublicRepository({
       assertInside(path.resolve(integrationsRoot), source, `source ${relative}`);
       const destination = path.join(temporaryRoot, ...relative.split("/"));
       await mkdir(path.dirname(destination), { recursive: true });
-      await cp(source, destination, { dereference: false, errorOnExist: true, force: false });
-      const content = await readFile(destination);
+      const content = normalizePublicFile(relative, await readFile(source));
+      await writeFile(destination, content, { flag: "wx" });
       manifestFiles.push({ path: relative, sha256: sha256(content), size: content.length });
     }
 

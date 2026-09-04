@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { once } from "node:events";
 import yazl from "yazl";
 import { assertReleaseIdentity } from "./version-policy.mjs";
+import { normalizePublicFile } from "./content-policy.mjs";
 
 const integrationsRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const release = JSON.parse(await readFile(path.join(integrationsRoot, "release.json"), "utf8"));
@@ -83,7 +84,7 @@ async function build(outputDirectory) {
   for (const file of files) {
     const relative = path.relative(integrationsRoot, file).replaceAll("\\", "/");
     const archiveName = `${release.bundle_basename}/${relative}`;
-    zip.addBuffer(await readFile(file), archiveName, { mtime: fixedMtime, mode: 0o100644 });
+    zip.addBuffer(normalizePublicFile(relative, await readFile(file)), archiveName, { mtime: fixedMtime, mode: 0o100644 });
   }
   zip.end();
   await once(destination, "close");

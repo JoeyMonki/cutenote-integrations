@@ -6,6 +6,16 @@
   "license": "MIT",
   "files": [
     {
+      "path": ".gitattributes",
+      "sha256": "287227363c550455d592c2a7da8c032253c22aeb14c18d0c811692685b141b50",
+      "size": 113
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "e8bc935ce727f1809c792f4c5d26c5fc75ba2b7df7fc9390c56c8892f6a6007f",
+      "size": 26
+    },
+    {
       "path": "CHANGELOG.md",
       "sha256": "c957e74b330242dbb2b94463f282120c051d7e5d71a5bf0c510638ff7008a130",
       "size": 826
@@ -37,8 +47,8 @@
     },
     {
       "path": "claude-code/cutenote/.mcp.json",
-      "sha256": "6bbdf2255ef4d1e219587d44f76373791dd21c388c1439deb5ee784ca1319654",
-      "size": 124
+      "sha256": "5ee10df5f37b39cde460cfb855ff2f2d180d6c9274191a163effee2b5da0b017",
+      "size": 116
     },
     {
       "path": "claude-code/cutenote/skills/cutenote/SKILL.md",
@@ -47,13 +57,13 @@
     },
     {
       "path": "codex/cutenote/.codex-plugin/plugin.json",
-      "sha256": "2cc271fff811c35d1c99b88b2ba53a41f2920e988bbb6cfd102e994bc6884d5c",
-      "size": 823
+      "sha256": "d5a3258e45c0aae45c53bf10a4c1c83d4a539beb74728ef2adb0d105b61cc5a5",
+      "size": 816
     },
     {
       "path": "codex/cutenote/.mcp.json",
-      "sha256": "6bbdf2255ef4d1e219587d44f76373791dd21c388c1439deb5ee784ca1319654",
-      "size": 124
+      "sha256": "5ee10df5f37b39cde460cfb855ff2f2d180d6c9274191a163effee2b5da0b017",
+      "size": 116
     },
     {
       "path": "codex/cutenote/skills/cutenote/SKILL.md",
@@ -107,8 +117,8 @@
     },
     {
       "path": "hermes/config.yaml",
-      "sha256": "22af87139136e3e2924f85a2d73b31208f58642fcb8822710e03c897b27d1478",
-      "size": 290
+      "sha256": "08b5add4791fbd1de58ee436050f03e9c63984929505f2b6342755a8d5a33725",
+      "size": 279
     },
     {
       "path": "marketplaces/claude/connector-review-materials.md",
@@ -137,8 +147,8 @@
     },
     {
       "path": "openclaw/config.jsonc",
-      "sha256": "7615e1d27380260558a4496930b65d3efc6ceff8ec1a400c68b65f54f6134271",
-      "size": 192
+      "sha256": "4899ab9c1330822ce39aa0519dcdc63bc28a157b9ae0e69d7d3d8b1425982586",
+      "size": 181
     },
     {
       "path": "package-lock.json",
@@ -152,18 +162,23 @@
     },
     {
       "path": "release.json",
-      "sha256": "49db64ac144689551985a5763c4deebc1a5d7a8887924a587d2a97d404df9338",
-      "size": 2513
+      "sha256": "496e2ba497e9a399ad3a611bd7f8e1f669a27c1933d23c4eba3846bd1399f324",
+      "size": 2587
     },
     {
       "path": "scripts/build-release.mjs",
-      "sha256": "5e07781f976f2318a8b02fd808650a2ed39d27c0339c51da0837932672491fe8",
-      "size": 4865
+      "sha256": "71f76b2beffa9d35dc1a60f340a48468c889b83917b8a871d990bc47e9fb8bb0",
+      "size": 4956
+    },
+    {
+      "path": "scripts/content-policy.mjs",
+      "sha256": "aa944046df17eb4e183d18e57953aa731ae8503e53cb848fbc569086fb404a3f",
+      "size": 780
     },
     {
       "path": "scripts/export-public-repo.mjs",
-      "sha256": "abcd026752172decc1254722f830f0ad7a5ac3c5a947eb08bd36c68a15de6efa",
-      "size": 9342
+      "sha256": "862f1fb2a579a31cec4f6f14400426d727e8e0f7b481690c2705a952df002d5c",
+      "size": 9631
     },
     {
       "path": "scripts/sync-cutenote-skill.mjs",
@@ -202,8 +217,8 @@
     },
     {
       "path": "workbuddy/cutenote/mcp.json",
-      "sha256": "5bb426a9cb71b9caca30fa0c8b4d5726e1c41361b44519bd18cd8b3360e8c70c",
-      "size": 159
+      "sha256": "ccdb590b4d1a7ec9e77827f6b94896e2d19ec4b841adcffbedd7a3740558f2f8",
+      "size": 150
     },
     {
       "path": "workbuddy/cutenote/skills/cutenote/SKILL.md",
