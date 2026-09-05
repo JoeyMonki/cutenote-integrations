@@ -187,8 +187,8 @@
     },
     {
       "path": "publication.json",
-      "sha256": "bdb4a6657538680ed990af8d3d42450ba54162496cc6ca5cf2a823a863b94fed",
-      "size": 509
+      "sha256": "1d11693504cc5603ee27032872cab723dc74cc67ba60c40fe65dd82e445310bf",
+      "size": 535
     },
     {
       "path": "release.json",
