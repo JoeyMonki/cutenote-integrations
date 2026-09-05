@@ -1,7 +1,7 @@
 import { lstat, readFile, readdir, realpath } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { assertReleaseIdentity } from "./version-policy.mjs";
+import { assertIntegrationVersion, assertReleaseIdentity } from "./version-policy.mjs";
 
 const integrationsRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const productionOrigin = "https://www.cutenote.app";
@@ -340,7 +340,14 @@ if (publication.artifact?.filename !== `${release.bundle_basename}.zip`
   throw new Error("publication.json: artifact filenames or SHA-256 are invalid");
 }
 
-const requiredVersionedArtifacts = ["mcp", "canonical_skill", "codex_plugin", "claude_plugin", "workbuddy_connector"];
+if (publication.state === "published" && !/^[a-f0-9]{64}$/.test(publication.artifact.sha256)) {
+  throw new Error("publication.json: published artifacts require a finalized SHA-256");
+}
+assertIntegrationVersion(release.artifacts?.mcp?.version, "release.json: mcp.version");
+if (!/^1\.\d+\.\d+$/.test(release.artifacts.mcp.version)) {
+  throw new Error("release.json: mcp.version must be a stable version in the supported MCP 1.x contract");
+}
+const requiredVersionedArtifacts = ["canonical_skill", "codex_plugin", "claude_plugin", "workbuddy_connector"];
 for (const artifactName of requiredVersionedArtifacts) {
   const artifact = release.artifacts?.[artifactName];
   if (!artifact || artifact.version !== release.release_version) {
@@ -359,6 +366,15 @@ for (const artifactName of ["codex_plugin", "claude_plugin", "workbuddy_connecto
 
 const codexManifestPath = path.join(integrationsRoot, "codex", "cutenote", ".codex-plugin", "plugin.json");
 const claudeManifestPath = path.join(integrationsRoot, "claude-code", "cutenote", ".claude-plugin", "plugin.json");
+const claudeMarketplace = JSON.parse(contents.get(path.join(integrationsRoot, ".claude-plugin", "marketplace.json")));
+if (claudeMarketplace.name !== "cutenote-integrations"
+  || claudeMarketplace.owner?.name !== "CuteNote"
+  || !Array.isArray(claudeMarketplace.plugins)
+  || claudeMarketplace.plugins.length !== 1
+  || claudeMarketplace.plugins[0].source !== "./claude-code/cutenote"
+  || claudeMarketplace.plugins[0].name !== JSON.parse(contents.get(claudeManifestPath)).name) {
+  throw new Error("Claude marketplace: expected one self-contained CuteNote plugin inside claude-code/cutenote");
+}
 const workbuddyManifestPath = path.join(integrationsRoot, "workbuddy", "cutenote", "connector-meta.json");
 const versionedManifests = [
   ["codex plugin", codexManifestPath],

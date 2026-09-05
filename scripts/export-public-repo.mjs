@@ -26,6 +26,7 @@ const allowedRootFiles = new Set([
   "release.json"
 ]);
 const allowedDirectories = new Set([
+  ".claude-plugin",
   ".github",
   "claude-code",
   "codex",

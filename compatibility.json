@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "integration_release": "1.0.0",
+  "integration_release": "1.0.1",
   "status_definitions": {
     "verified": "Current named client version passed the recorded end-to-end acceptance flow.",
     "compatible": "Required protocol capabilities are confirmed, but the complete acceptance flow was not rerun for this release.",

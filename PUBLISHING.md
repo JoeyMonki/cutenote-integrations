@@ -4,7 +4,7 @@
 
 ## Unified version contract
 
-`release.json` is the machine-readable source of truth. The MCP server, canonical Skill, Codex plugin, Claude plugin, and WorkBuddy connector currently ship as one synchronized release train. Every versioned artifact must use the same Semantic Versioning (SemVer) value; the validator rejects drift between `release.json`, the MCP server declaration, packaged manifests, and `compatibility.json`.
+`release.json` is the machine-readable source of truth. The canonical Skill, Codex plugin, Claude plugin, WorkBuddy connector, package, and compatibility record use one synchronized Semantic Versioning (SemVer) release. The remote MCP service is versioned independently: `artifacts.mcp.version` records its contract version, and every package declares the supported `requires_mcp` range. An integration-only patch does not claim a backend deployment. The validator rejects package-version drift and incompatible MCP contract declarations; private runtime tests separately check the MCP server declaration.
 
 - `PATCH` is for backwards-compatible fixes, documentation corrections, and behavior changes that preserve tool names and accepted schemas.
 - `MINOR` is for backwards-compatible additions such as a new optional input, additive output field, new tool, or new client package.
