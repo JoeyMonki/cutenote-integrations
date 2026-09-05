@@ -62,7 +62,7 @@ See the human-readable [compatibility matrix](docs/compatibility.md) and machine
 - Support: **TODO — no confirmed public support URL yet**
 - Service status: **TODO — no confirmed public status page yet**
 
-The official public source repository is [JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations). It is a one-way generated mirror of the private authoring source. The GitHub source repository is live. The v1.0.0 assets are release-ready for the current publication batch, but this document does not claim the GitHub Release is live; [`publication.json`](publication.json) is the machine-readable publication record. npm publication, marketplace listings, and remote publication automation are not live yet. See [PUBLISHING.md](PUBLISHING.md).
+The official public source repository is [JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations). It is a one-way generated mirror of the private authoring source. The public v1.0.0 release is unchanged. This source tree prepares the v1.0.1 integration candidate, which is not yet published and does not change the remote MCP 1.0.0 contract. [`publication.json`](publication.json) is the machine-readable publication record for this candidate. npm publication, official marketplace listings, and remote publication automation are not live yet. See [PUBLISHING.md](PUBLISHING.md).
 
 ## Validate a source checkout
 

@@ -1,10 +1,15 @@
 {
   "schema_version": 1,
   "name": "cutenote-integrations",
-  "version": "1.0.0",
-  "release_tag": "cutenote-integrations-v1.0.0",
+  "version": "1.0.1",
+  "release_tag": "cutenote-integrations-v1.0.1",
   "license": "MIT",
   "files": [
+    {
+      "path": ".claude-plugin/marketplace.json",
+      "sha256": "2251518ade1ac2ac7213c88c877fb346b37981b1b9b5cc8590c61ca0fba1bc02",
+      "size": 403
+    },
     {
       "path": ".gitattributes",
       "sha256": "287227363c550455d592c2a7da8c032253c22aeb14c18d0c811692685b141b50",
@@ -27,8 +32,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "b88a5b11fb420b28d3d1185538682c1d27008c3ddf3fbb8563a1f63c09db171a",
-      "size": 1218
+      "sha256": "09add7d53d50fb9dd4ca5a5454f9c5bc743f352441e50e28f52e8700f1ac5172",
+      "size": 1606
     },
     {
       "path": "LICENSE",
@@ -37,18 +42,18 @@
     },
     {
       "path": "PUBLISHING.md",
-      "sha256": "2a4faaccbb510aad67b4ca8697dd13504d28c1e018b8dac3d1fcd3e916a8ac27",
-      "size": 8382
+      "sha256": "efb393970ea697b5e55d1e4c289d1adcfa46fd3bc736d06ecdf80f2f51a91c2c",
+      "size": 8591
     },
     {
       "path": "README.md",
-      "sha256": "794ece370ccd2da201b1618fa17593c9f73b8fe641473812c27c54a83ceb4dcb",
-      "size": 4956
+      "sha256": "a81ca05203e3be1283ce0bea4233b8b17c09cc03c15a02976db13a5c0c5171eb",
+      "size": 4992
     },
     {
       "path": "README.zh-CN.md",
-      "sha256": "f7d9efae7725e3bad699390b1d765f6eda837e3aa12ac6c178487814b395ef57",
-      "size": 4563
+      "sha256": "dc616541ecfb37df39902ecbb178534b1bc03aa20924779b64a7ea1e36c00edb",
+      "size": 4587
     },
     {
       "path": "SECURITY.md",
@@ -56,8 +61,13 @@
       "size": 1062
     },
     {
+      "path": "claude-code/README.md",
+      "sha256": "383e989279595b69757a782a81b9deaff2049331ce8b2506dba3963809f58028",
+      "size": 2714
+    },
+    {
       "path": "claude-code/cutenote/.claude-plugin/plugin.json",
-      "sha256": "489fc5a3a76d8e75c3c13ecdb8e5a6ea80ce15fe1a4d4045749f9b860fe22824",
+      "sha256": "7e66e943da9e3c9206d53a5834315d31479234da733556bfe7c626713a55c9d6",
       "size": 169
     },
     {
@@ -72,7 +82,7 @@
     },
     {
       "path": "codex/cutenote/.codex-plugin/plugin.json",
-      "sha256": "d5a3258e45c0aae45c53bf10a4c1c83d4a539beb74728ef2adb0d105b61cc5a5",
+      "sha256": "5f607c63b24360092f7174257ee682f83510efaaf13708f7ef75349514cb000c",
       "size": 816
     },
     {
@@ -92,7 +102,7 @@
     },
     {
       "path": "compatibility.json",
-      "sha256": "e79084c59e3e50bc73035b5ad8fe3aaec616e40dd3b5775b033743de2a124441",
+      "sha256": "36de0b78cc7d5c71e9a3ea17dad74f75d8b6d2d8fdbe1f72af86385689a13638",
       "size": 3011
     },
     {
@@ -167,23 +177,23 @@
     },
     {
       "path": "package-lock.json",
-      "sha256": "e426dbeb9bbdb078cd2f0c2c31a987878eb43c818ee05a387b9514476f15b506",
+      "sha256": "9d437463659fcff719b70b123c781baffdb7341b02c3fa9ce5a5eda6f77b358b",
       "size": 1070
     },
     {
       "path": "package.json",
-      "sha256": "9e4c46194bdca5612939ab59d2cc0cc1df3a1456e0aa246571aab178d73f9e3c",
+      "sha256": "0fb8c0ddbde9850f579c71221d37b7c1851daa3ec2351f73082da72844984763",
       "size": 500
     },
     {
       "path": "publication.json",
-      "sha256": "3723ecbfbe61ed0c423f86b9395e7472ca0ed26d32c3a1c62b6a96386ad8a668",
-      "size": 535
+      "sha256": "bdb4a6657538680ed990af8d3d42450ba54162496cc6ca5cf2a823a863b94fed",
+      "size": 509
     },
     {
       "path": "release.json",
-      "sha256": "9faf7c0d4a629e7dfeb921e0d4d5c49534ed45ab79d58bd3dad7a04cf6f188d2",
-      "size": 2749
+      "sha256": "6b34b4150b0a201e88d88f11e754a768fef169baaa0b6d0a322cc73676efcd11",
+      "size": 2817
     },
     {
       "path": "scripts/build-release.mjs",
@@ -197,8 +207,8 @@
     },
     {
       "path": "scripts/export-public-repo.mjs",
-      "sha256": "34c47d85a4d716f3059022afe3f2cde820e0698b2896bdb47ed62092157acb01",
-      "size": 10405
+      "sha256": "de1e4578e80067ef879ecc31b5d3b298dffa1bd732b34da35c4d47ce6fc0fe58",
+      "size": 10425
     },
     {
       "path": "scripts/record-github-release.mjs",
@@ -212,8 +222,8 @@
     },
     {
       "path": "scripts/validate-artifacts.mjs",
-      "sha256": "8d4959537977a8835ba0860582fb737569811a4341dcf717381ddf572d2d0659",
-      "size": 22094
+      "sha256": "78dcd016f236282e4830fba9849b9b5258881036ed07f4fb77c12ebca6a0be26",
+      "size": 23153
     },
     {
       "path": "scripts/version-policy.mjs",
@@ -232,7 +242,7 @@
     },
     {
       "path": "workbuddy/cutenote/connector-meta.json",
-      "sha256": "58622ccb5913a2f7d4c28a390364f719106d8df7f47e704fb187cc8f7e13c663",
+      "sha256": "aa9faa20f3776b2b106a37d617a3a6a77d48af9a1598cc066d6017bed34ea69a",
       "size": 613
     },
     {

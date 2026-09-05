@@ -7,7 +7,7 @@
   "description_en": "Turn text or links into long images, mind maps, or Markdown notes and export them.",
   "source": "cutenote",
   "type": "mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "examples_zh": ["把这个链接生成长图笔记", "把我最近的笔记导出成 Markdown"],
   "examples_en": ["Turn this link into a long-image note", "Export my latest note as Markdown"]
 }

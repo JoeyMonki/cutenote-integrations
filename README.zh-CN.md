@@ -62,7 +62,7 @@ CuteNote 有意不提供 `ask_note` 工具。
 - 用户支持：**TODO — 尚未确认公开支持 URL**
 - 服务状态：**TODO — 尚未确认公开状态页**
 
-官方公开源码仓库是 [JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations)，它是私有编写源的单向生成镜像。GitHub 源码仓库已经上线；v1.0.0 资产已为当前发布批次准备完毕，但本文档不提前宣称 GitHub Release 已上线，机器可读的实际发布状态以 [`publication.json`](publication.json) 为准。npm 发布、市场条目和远程发布自动化尚未上线。详见 [PUBLISHING.md](PUBLISHING.md)。
+官方公开源码仓库是 [JoeyMonki/cutenote-integrations](https://github.com/JoeyMonki/cutenote-integrations)，它是私有编写源的单向生成镜像。已公开的 v1.0.0 发布保持不变。本源码树准备的是尚未发布的 v1.0.1 集成包候选，不代表远程 MCP 1.0.0 服务发生升级。当前候选的机器可读发布状态以 [`publication.json`](publication.json) 为准。npm 发布、官方市场条目和远程发布自动化尚未上线。详见 [PUBLISHING.md](PUBLISHING.md)。
 
 ## 校验源码工作区
 

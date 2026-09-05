@@ -1,0 +1,13 @@
+{
+  "name": "cutenote-integrations",
+  "owner": { "name": "CuteNote", "email": "support@biostore.cc" },
+  "description": "CuteNote visual-note tools and skills for Claude Code.",
+  "plugins": [
+    {
+      "name": "cutenote",
+      "source": "./claude-code/cutenote",
+      "description": "Create, read, and export CuteNote visual notes through OAuth MCP.",
+      "category": "productivity"
+    }
+  ]
+}

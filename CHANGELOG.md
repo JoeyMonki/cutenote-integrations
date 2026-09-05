@@ -6,6 +6,12 @@ All notable changes to the public CuteNote integration artifacts are recorded he
 
 No changes yet.
 
+## [1.0.1] - local release candidate
+
+- Added the Claude Code repository marketplace catalog and installation instructions.
+- Updated the integration packages and canonical Skill release to 1.0.1; the remote MCP service remains 1.0.0 and uses the existing 1.x compatibility contract.
+- This candidate is not yet published. The existing public 1.0.0 release and its assets are unchanged.
+
 ## [1.0.0] - source baseline
 
 - Defined the first versioned contract for the remote MCP server, canonical Skill, Codex plugin, Claude plugin, and WorkBuddy connector.
